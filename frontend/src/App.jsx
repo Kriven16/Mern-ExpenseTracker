@@ -11,19 +11,24 @@ import Home from "./pages/Dashboard/Home";
 import Expense from "./pages/Dashboard/Expense";
 import Income from "./pages/Dashboard/Income";
 import UserProvider from "./context/UserContext";
-
+import DashboardLayout from "./components/layouts/DashboardLayout";
+import { Toaster } from "react-hot-toast";
 const App = () => {
   return (
     <UserProvider>
       <div>
         <Router>
+          <Toaster
+            toastOptions={{ className: "", style: { fontSize: "13px" } }}
+          />
           <Routes>
-            {/* <Route path="/" element= {<Root/>}/> */}
+            <Route path="/" element={<Root />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/dashboard" element={<Home />} />
             <Route path="/income" element={<Income />} />
             <Route path="/expense" element={<Expense />} />
+
             <Route />
           </Routes>
         </Router>

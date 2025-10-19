@@ -32,7 +32,7 @@ export const getAllIncome = async (req, res) => {
 
   try {
     const income = await Income.find({ userId }).sort({ data: -1 });
-    res.status(200).json({ income });
+    res.status(200).json( income );
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: "Internal Server Error" });
