@@ -6,6 +6,7 @@ import CharAvatar from "../Cards/CharAvatar";
 
 const SideMenu = ({ activeMenu }) => {
   const { user, clearUser } = useContext(UserContext);
+  console.log(user)
 
   const navigate = useNavigate();
 
@@ -28,13 +29,18 @@ const SideMenu = ({ activeMenu }) => {
     <div className="w-64 h-[calc(100vh-61px)] bg-white border-gray-200/50 p-5 sticky top-[61px] z-20">
       <div className="flex flex-col items-center justify-center gap-3 mt-3 mb-7">
         {user?.profileImageUrl ? (
+          <>
           <img
             className="w-28 h-28  object-cover rounded-full bg-slate-200"
             src={user.profileImageUrl}
             alt={user.fullName || "User"}
           />
+         
+          
+          </>
         ) : (
-          <CharAvatar fullName={user?.fullName } width="w-20" height='h-20' style='text-xl' />
+          <CharAvatar fullName={user?.fullName } width="w-20" height='h-20' className='text-xl' />
+         
         )}
 
         <h5 className="text-gray-950 font-medium leading-6">

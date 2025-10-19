@@ -12,7 +12,7 @@ import { connectDB } from './config/db.js';
 
 
 
-dotenv.config()
+dotenv.config({path:"./backend/.env"})
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -36,16 +36,23 @@ app.use("/api/v1/dashboard",dashboardRoutes)
 app.use("/uploads",express.static(path.join(__dirname,'uploads')))
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend", "dist")));
+  const frontendPath = path.join(__dirname, "../frontend/dist");
 
-  app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-  });
+  // Serve React static files
+  app.use(express.static(frontendPath));
+
+  // Fallback to index.html for React Router
+app.use((req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
+
+
 }
 
 app.listen(PORT,()=>{
 console.log(`Server is running on port :${PORT}`)
 connectDB()
+
 
 })
 
